@@ -72,14 +72,14 @@ public class StudentStorage {
             Student student = studentStorageMap.get(studentId);
             System.out.println(student);
         }
-        Set<Long> studentHome = studentStorageMap.keySet();
-        for (Long studId : studentHome) {
-            Student studentH = studentStorageMap.get(studId);
-            if (surname.isEmpty()) {
-                System.out.println(studentH);
+      // Set<Long> studentHome = studentStorageMap.keySet();
+      // for (Long studId : studentHome) {
+      //     Student studentH = studentStorageMap.get(studId);
+      //     if (surname.isEmpty()) {
+      //         System.out.println(studentH);
 
-            }
-        }
+      //     }
+      // }
     }
 
        /* Set<Long> studentHome = studentStorageMap.keySet();
