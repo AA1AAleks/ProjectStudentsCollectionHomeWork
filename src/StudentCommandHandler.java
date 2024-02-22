@@ -46,8 +46,9 @@ public class StudentCommandHandler {
 private void processSearchHomeCommand(Command command){
         String data = command.getData();
         String[] dataArrayH = data.split(",");
-        String surnameH = String.valueOf(dataArrayH[0]);
-       studentStorage.searchHome(surnameH);
+        Student student = new Student();
+        student.setSurname(dataArrayH[0]);
+       studentStorage.searchHome(student.getSurname());
 
 }
 
