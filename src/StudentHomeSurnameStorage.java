@@ -23,11 +23,11 @@ public class StudentHomeSurnameStorage {
         studentCreateHome(id, newsSurname);
     }
 
-    public Set<Long> getStudentBySurnamesLessOrEqualThanHome(String surnameStart, String surnameEnd) {
+    public Set<Long> getStudentBySurnamesLessOrEqualThanHome(String surname) {
 
         Set<Long> result;
         result = surnamesTreeMapHome
-                .subMap(surnameStart, true, surnameEnd, true)
+                .subMap(surname, true, surname, true)
                 .values().stream()
                 .flatMap(Collection::stream)
                 .collect(Collectors.toSet());

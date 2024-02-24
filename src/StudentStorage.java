@@ -1,7 +1,5 @@
-import java.util.HashMap;
+import java.util.*;
 
-import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class StudentStorage {
@@ -65,22 +63,27 @@ public class StudentStorage {
             System.out.println(student);
         }
     }
-    public void searchHome(String surname) {
-        Set<Long> students = studentHomeSurnameStorage
-                .getStudentBySurnamesLessOrEqualThanHome(surname, surname);
-        for (Long studentId : students) {
-            Student student = studentStorageMap.get(studentId);
-            System.out.println(student);
-        }
-      // Set<Long> studentHome = studentStorageMap.keySet();
-      // for (Long studId : studentHome) {
-      //     Student studentH = studentStorageMap.get(studId);
-      //     if (surname.isEmpty()) {
-      //         System.out.println(studentH);
+    public List<Student> searchHome(String surname) {
 
-      //     }
-      // }
+        List<Student> resList = new ArrayList<>();
+        Set<Long> students = studentHomeSurnameStorage
+                .getStudentBySurnamesLessOrEqualThanHome(surname);
+        for (Long studentId : students) {
+            Student studentH = studentStorageMap.get(studentId);
+
+            resList.add(studentH);
+        }
+        return resList;
     }
+     // Set<Long> studentHome = studentStorageMap.keySet();
+     // for (Long studId : studentHome) {
+     //     Student studentH = studentStorageMap.get(studId);
+     //     if (surname.isEmpty()) {
+     //         System.out.println(studentH);
+
+     //     }
+     // }
+  //  }
 
        /* Set<Long> studentHome = studentStorageMap.keySet();
         for (Long studId : studentHome){

@@ -1,4 +1,8 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class StudentCommandHandler {
     private StudentStorage studentStorage = new StudentStorage();
@@ -45,10 +49,14 @@ public class StudentCommandHandler {
 
 private void processSearchHomeCommand(Command command){
         String data = command.getData();
+
         String[] dataArrayH = data.split(",");
-        Student student = new Student();
-        student.setSurname(dataArrayH[0]);
-       studentStorage.searchHome(student.getSurname());
+        List<Student> studentSet = new ArrayList<>();
+        for (String s : dataArrayH){
+            studentSet.addAll(studentStorage.searchHome(s));
+
+        }
+       studentSet.stream().sorted().forEach(System.out::println);
 
 }
 
@@ -60,6 +68,10 @@ private void processSearchHomeCommand(Command command){
     private void processSearchCommand(Command command){
         String surname = command.getData();
         studentStorage.search(surname);
+        if(surname.isEmpty()){
+            throw new RuntimeException("Введите правильное имя");
+        }
+
     }
 
     private void processStatsByCourseCommand(Command command) {
@@ -78,6 +90,14 @@ private void processSearchHomeCommand(Command command){
         student.setCourse(dataArray[2]);
         student.setCity(dataArray[3]);
         student.setAge(Integer.valueOf(dataArray[4]));
+
+        if(student.getAge()<=0){
+            throw new RuntimeException("Возраст не может быть отрицательным");
+
+        }if(dataArray.length>5){
+            throw new RuntimeException("Вы превысили длину ввода значений");
+
+        }
         studentStorage.createStudent(student);
         studentStorage.printAll();
 
@@ -93,6 +113,14 @@ private void processSearchHomeCommand(Command command){
         student.setCourse(dataArray[3]);
         student.setCity(dataArray[4]);
         student.setAge(Integer.valueOf(dataArray[5]));
+
+
+        if(student.getAge()<=0){
+            throw new RuntimeException("Возраст не может быть отрицательным");
+
+        }if(dataArray.length>6) {
+            throw new RuntimeException("Вы превысили длину ввода значений");
+        }
         studentStorage.updateStudent(id,student);
         studentStorage.printAll();
 
@@ -101,6 +129,7 @@ private void processSearchHomeCommand(Command command){
     public void processDeleteCommand(Command command){
         String data = command.getData();
         Long id = Long.valueOf(data);
+
         studentStorage.deleteStudent(id);
         studentStorage.printAll();
     }
