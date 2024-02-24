@@ -1,8 +1,7 @@
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 public class StudentCommandHandler {
     private StudentStorage studentStorage = new StudentStorage();
@@ -49,15 +48,15 @@ public class StudentCommandHandler {
 
 private void processSearchHomeCommand(Command command){
         String data = command.getData();
-
         String[] dataArrayH = data.split(",");
         List<Student> studentSet = new ArrayList<>();
         for (String s : dataArrayH){
-            studentSet.addAll(studentStorage.searchHome(s));
-
-        }
        studentSet.stream().sorted().forEach(System.out::println);
-
+            studentSet.addAll(studentStorage.searchHome(s));
+            if(data.isEmpty()){
+             System.out.println("Как вернуть сюда полный список входных данных");
+            }
+        }
 }
 
     private void processStatsByCityCommand(Command command) {

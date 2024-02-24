@@ -64,17 +64,16 @@ public class StudentStorage {
         }
     }
     public List<Student> searchHome(String surname) {
-
         List<Student> resList = new ArrayList<>();
         Set<Long> students = studentHomeSurnameStorage
                 .getStudentBySurnamesLessOrEqualThanHome(surname);
         for (Long studentId : students) {
             Student studentH = studentStorageMap.get(studentId);
-
             resList.add(studentH);
         }
         return resList;
     }
+
      // Set<Long> studentHome = studentStorageMap.keySet();
      // for (Long studId : studentHome) {
      //     Student studentH = studentStorageMap.get(studId);
