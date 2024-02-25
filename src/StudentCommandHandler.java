@@ -51,12 +51,13 @@ private void processSearchHomeCommand(Command command){
         String[] dataArrayH = data.split(",");
         List<Student> studentSet = new ArrayList<>();
         for (String s : dataArrayH){
-       studentSet.stream().sorted().forEach(System.out::println);
             studentSet.addAll(studentStorage.searchHome(s));
-            if(data.isEmpty()){
-             System.out.println("Как вернуть сюда полный список входных данных");
             }
+        if(data.isEmpty()){
+            System.out.println("Как вывести полный список студентов?");
         }
+        studentSet.stream().sorted().forEach(System.out::println);
+
 }
 
     private void processStatsByCityCommand(Command command) {
@@ -93,8 +94,8 @@ private void processSearchHomeCommand(Command command){
         if(student.getAge()<=0){
             throw new RuntimeException("Возраст не может быть отрицательным");
 
-        }if(dataArray.length>5){
-            throw new RuntimeException("Вы превысили длину ввода значений");
+        }if(dataArray.length != 5){
+            throw new RuntimeException("Неправильная длинна ввода значений");
 
         }
         studentStorage.createStudent(student);
